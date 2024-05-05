@@ -192,6 +192,14 @@ def on_button(callback, args=(), buttons=(LEFT, MIDDLE, RIGHT, X, X2), types=(UP
     _listener.add_handler(handler)
     return handler
 
+def on_any_button(callback):
+    """ Invokes `callback` with `event` as arg when the specified event happens. """
+    def handler(event):
+        if isinstance(event, ButtonEvent):
+                callback(event)
+    _listener.add_handler(handler)
+    return handler
+
 def on_pressed(callback, args=()):
     """ Invokes `callback` with `args` when the left button is pressed. """
     return on_button(callback, args, [LEFT], [DOWN])
